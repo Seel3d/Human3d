@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,12 +7,12 @@ using Seel3d.Human3d.Object;
 namespace Seel3d.Human3d.Loader
 {
     public class MaterialLoader : ILoader
-    {
-        public static List<string> MtlHeader
-        {
-            get
-            {
-                return new List<string>
+    {	
+		public static List<string> MtlHeader
+		{
+			get
+			{
+		    	return new List<string>
 			    {
 			        "#",
 			        "# Exported material ",
@@ -22,23 +22,17 @@ namespace Seel3d.Human3d.Loader
 			        "# Or contact aurelien.souchet@epitech.eu ",
 			        "#"
 			    };
-            }
-        }
+			}
+		}
 
         #region ILoader implementation
 
-        public ILoadable Load(StreamReader sr)
+        public ILoadable Load(string path)
         {
-            var newMaterial = new Material();
-	        string line = null;
-
-            while (line = sr.ReadLine() != null)
-	        {
-		        if (line.StartsWith("#") || String.IsNullOrEmpty(line) || String.IsNullOrWhiteSpace(line))
-		        {
-			        continue;
-		        }
-
+			var newMaterial = new Material();
+			
+            foreach (var line in File.ReadLines(path).Where(line => !line.StartsWith("#") && !String.IsNullOrEmpty(line) && !String.IsNullOrWhiteSpace(line)))
+            {
                 if (line.StartsWith("newmtl"))
                 {
                     newMaterial.Name = line.Remove(0, 7);
@@ -67,17 +61,18 @@ namespace Seel3d.Human3d.Loader
                 {
                     throw new Exception("Got a problem when parsing file, line is: " + line);
                 }
-	        }
+            }
 
-            return newMaterial;
+			
+			return newMaterial;
         }
 
-        public void Save(ILoadable toSave, Stream stream)
+        public void Save(ILoadable toSave, string path)
         {
             var material = toSave as Material;
             if (material != null)
             {
-                using (StreamWriter file = new StreamWriter(stream))
+                using (StreamWriter file = new StreamWriter(path))
                 {
                     foreach (var line in MtlHeader)
                     {

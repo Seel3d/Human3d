@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using Seel3d.Human3d.Object;
@@ -10,24 +10,15 @@ namespace Seel3d.Human3d.Loader
     {
         #region ILoader implementation
 
-        public static ILoadable Load(StreamReader sr)
+        public static ILoadable Load(string name)
         {
-            //todo change
-	        string name = "test";
             var newTransformation = new Transformation(name);
 
-            // var _strAppDir = AppDomain.CurrentDomain.RelativeSearchPath;
-	        var _strAppDir = ".";  
+            var _strAppDir = AppDomain.CurrentDomain.RelativeSearchPath;
 
             string path = String.Format(@"{0}\Targets\{1}.target", _strAppDir, name);
 
-            string line = 
-
-
-
-
-
-            foreach (var values in sr.ReadLine(path)
+            foreach (var values in File.ReadLines(path)
                 .Where(line => !line.StartsWith("#") && !String.IsNullOrEmpty(line) && !String.IsNullOrWhiteSpace(line))
                 .Select(line => line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
                 .Where(values => values.Length >= 4))
@@ -42,12 +33,12 @@ namespace Seel3d.Human3d.Loader
             return newTransformation;
         }
 
-        ILoadable ILoader.Load(StreamReader sr)
+        ILoadable ILoader.Load(string name)
         {
-            return Load(sr);
+            return Load(name);
         }
 
-        public void Save(ILoadable toSave, Stream stream)
+        public void Save(ILoadable toSave, string path)
         {
             throw new NotImplementedException();
         }

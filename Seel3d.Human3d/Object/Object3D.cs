@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Seel3d.Human3d.Loader;
+using Seel3d.Human3d.Object;
 using Seel3d.Human3d.Part;
 
-namespace Seel3d.Human3d.Object
+namespace Seel3d.Human3d
 {
     public class Object3D : ILoadable
     {
@@ -26,21 +27,21 @@ namespace Seel3d.Human3d.Object
             Coords = new List<Coord>();
             MaterialLibNames = new List<string>();
             Groups = new List<Group>();
-            Materials = new Dictionary<string, Material>();
+			Materials = new Dictionary<string, Material>();
         }
 
-        public void ApplyTransformation(Transformation toApply, double factor = 0.5)
-        {
-            foreach (var translation in toApply.Translations)
-            {
-                var index = translation.Key;
-                var toAddVertex = translation.Value.AddFactor(factor);
-                if (index < Vertices.Count)
-                {
-                    var originalVertex = Vertices[index];
-                    Vertices[translation.Key] = Vertices[index].Add(toAddVertex);
-                }
-            }
-        }
+		public void ApplyTransformation(Transformation toApply, double factor = 0.5)
+		{
+			foreach (var translation in toApply.Translations)
+			{
+			    var index = translation.Key;
+			    var toAddVertex = translation.Value.AddFactor(factor);
+			    if (index < Vertices.Count)
+			    {
+			        var originalVertex = Vertices[index];
+			        Vertices[translation.Key] = Vertices[index].Add(toAddVertex);
+			    }
+			}
+		}
     }
 }

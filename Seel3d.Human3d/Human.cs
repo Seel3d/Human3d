@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +18,9 @@ namespace Seel3d.Human3d
 
         public string Height { get; set; }
 
-        public Sexe Sexe { get; set; }
+        public Body Body { get; set; }
+
+        public Sex Sexe { get; set; }
 
         public WavefrontLoader Loader { get; set; }
 
@@ -29,10 +30,10 @@ namespace Seel3d.Human3d
 
         #region Constructors
 
-        public Human(StreamReader stream)
+        public Human(string path)
         {
             Loader = new WavefrontLoader();
-            _object3D = Loader.Load(stream) as Object3D;
+            _object3D = Loader.Load(path) as Object3D;
             Transformations = new Dictionary<string, double>();
         }
 
@@ -45,14 +46,14 @@ namespace Seel3d.Human3d
 
         #endregion
 
-        public void Import(StreamReader sr)
+        public void Import(string path)
         {
-            _object3D = Loader.Load(sr) as Object3D;
+            _object3D = Loader.Load(path) as Object3D;
         }
 
-        public void Export(Stream stream)
+        public void Export(string path, Export3DType exportType = Export3DType.WaveFront)
         {
-            Loader.Save(_object3D, stream);
+            Loader.Save(_object3D, path);
         }
 
         public void ApplyTransformation(Transformation transform, double coef)
@@ -60,19 +61,19 @@ namespace Seel3d.Human3d
             _object3D.ApplyTransformation(transform, coef);
         }
 
-        public void LaunchTransform(int height, int age, Sexe sexe)
+        public void LaunchTransform(int height, int age, Sex sexe)
         {
             PrepareTransformations(height, age, sexe);
             ApplyTransformations();
         }
 
-        private void PrepareTransformations(int height, int age, Sexe sexe)
+        private void PrepareTransformations(int height, int age, Sex sexe)
         {
             Transformations = new Dictionary<string, double>();
 
             Transformations.Add("age_body", (age - 25d) / (90d - 25d));
             Transformations.Add("height_body", (height - 155d) / (194d - 155d));
-            if (sexe == Sexe.Woman)
+            if (sexe == Sex.Woman)
             {
                 Transformations.Add("sex_body", 1.0d);
             }
@@ -162,10 +163,8 @@ namespace Seel3d.Human3d
         private void ApplyTransformations()
         {
             foreach (var tranformation in Transformations)
-            {         
-                // todo change that
-                //ApplyTransformation(TransformationLoader.Load(tranformation.Key) as Transformation, tranformation.Value);
-                ApplyTransformation(TransformationLoader.Load(new StreamReader("")) as Transformation, tranformation.Value);
+            {
+                ApplyTransformation(TransformationLoader.Load(tranformation.Key) as Transformation, tranformation.Value);
                 //Transformations.Remove(tranformation.Key);
             }
         }

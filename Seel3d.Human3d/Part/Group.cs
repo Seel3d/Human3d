@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Seel3d.Human3d.Object;
 
 namespace Seel3d.Human3d.Part

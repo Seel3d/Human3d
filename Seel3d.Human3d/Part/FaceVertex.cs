@@ -3,7 +3,7 @@
     public class FaceVertex
     {
         public int VertexIndex { get; set; }
-
+        
         public int TextureIndex { get; set; }
 
         public int NormalIndex { get; set; }

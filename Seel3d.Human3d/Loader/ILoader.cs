@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +9,8 @@ namespace Seel3d.Human3d.Loader
 {
     public interface ILoader
     {
-        ILoadable Load(StreamReader sr);
+        ILoadable Load(string name);
 
-        void Save(ILoadable toSave, Stream stream);
+        void Save(ILoadable toSave, string path);
     }
 }

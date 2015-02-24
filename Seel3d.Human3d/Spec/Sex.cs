@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Seel3d.Human3d.Windows
+namespace Seel3d.Human3d
 {
-    public class Class1
+    public enum Sex
     {
+        Woman,
+        Man
     }
 }
