@@ -14,9 +14,9 @@ namespace Seel3d.Human3d.Loader
         {
             var newTransformation = new Transformation(name);
 
-            var _strAppDir = AppDomain.CurrentDomain.RelativeSearchPath;
+            var strAppDir = AppDomain.CurrentDomain.RelativeSearchPath;
 
-            string path = String.Format(@"{0}\Targets\{1}.target", _strAppDir, name);
+            string path = String.Format(@"{0}\Targets\{1}.target", strAppDir, name);
 
             foreach (var values in File.ReadLines(path)
                 .Where(line => !line.StartsWith("#") && !String.IsNullOrEmpty(line) && !String.IsNullOrWhiteSpace(line))
@@ -44,5 +44,10 @@ namespace Seel3d.Human3d.Loader
         }
 
         #endregion
+
+        public void Dispose()
+        {
+            
+        }
     }
 }

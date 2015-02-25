@@ -11,28 +11,26 @@ namespace Seel3d.Human3d.Loader
 {
 	public class WavefrontLoader : ILoader
 	{
-		private static IEnumerable<string> ObjHeader
+		private static IEnumerable<string> ObjHeader => new List<string>
 		{
-			get
-			{
-				return new List<string>
-				{
-					"#",
-					"# Exported 3d model ",
-					"#",
-					"# Made by Seel3d (c)",
-					"# For more informations visit www.seel3d.com",
-					"# Or contact aurelien.souchet@epitech.eu ",
-					"#"
-				};
-			}
-		}
+		    "#",
+		    "# Exported 3d model ",
+		    "#",
+		    "# Made by Seel3d (c)",
+		    "# For more informations visit www.seel3d.com",
+		    "# Or contact aurelien.souchet@epitech.eu ",
+		    "#"
+		};
 
-		#region ILoader implementation
+	    #region ILoader implementation
 
 		public void Save(ILoadable toLoad, string path)
 		{
 			var obj = toLoad as Object3D;
+		    if (obj == null)
+		    {
+		        throw new ArgumentException("Parameter not valid","toLoad");
+		    }
 			using (var file = new StreamWriter(path))
 			{
 				foreach (var line in ObjHeader)
@@ -156,11 +154,11 @@ namespace Seel3d.Human3d.Loader
 		{
 			var vertexBuilder = new StringBuilder();
 			vertexBuilder.Append("v ");
-            vertexBuilder.AppendFormat("{0:0.0000}", vtx.X, CultureInfo.InvariantCulture);
+            vertexBuilder.AppendFormat("{0:0.0000}", vtx.X);
             vertexBuilder.Append(" ");
-            vertexBuilder.AppendFormat("{0:0.0000}", vtx.Y, CultureInfo.InvariantCulture);
+            vertexBuilder.AppendFormat("{0:0.0000}", vtx.Y);
 			vertexBuilder.Append(" ");
-            vertexBuilder.AppendFormat("{0:0.0000}", vtx.Z, CultureInfo.InvariantCulture);
+            vertexBuilder.AppendFormat("{0:0.0000}", vtx.Z);
 			return vertexBuilder.ToString().Replace(",", ".");
 		}
 
@@ -238,5 +236,9 @@ namespace Seel3d.Human3d.Loader
 			}
 			return face;
 		}
+
+	    public void Dispose()
+	    {
+	    }
 	}
 }

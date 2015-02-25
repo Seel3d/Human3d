@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Seel3d.Human3d.Loader;
 using Seel3d.Human3d.Part;
 
 namespace Seel3d.Human3d.Object

@@ -1,13 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Seel3d.Human3d.Loader;
-using Seel3d.Human3d.Object;
 using Seel3d.Human3d.Part;
 
-namespace Seel3d.Human3d
+namespace Seel3d.Human3d.Object
 {
     public class Object3D : ILoadable
     {

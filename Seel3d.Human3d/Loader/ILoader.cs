@@ -7,7 +7,7 @@ using Seel3d.Human3d.Object;
 
 namespace Seel3d.Human3d.Loader
 {
-    public interface ILoader
+    public interface ILoader : IDisposable
     {
         ILoadable Load(string name);
 

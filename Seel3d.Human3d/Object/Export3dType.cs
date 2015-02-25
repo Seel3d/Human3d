@@ -9,6 +9,6 @@ namespace Seel3d.Human3d.Object
     public enum Export3DType
     {
         WaveFront,
-        Seel3d
+        Seel3D
     }
 }

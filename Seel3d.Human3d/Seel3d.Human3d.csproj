@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="Human.cs" />
     <Compile Include="Loader\ILoader.cs" />
+    <Compile Include="Loader\LoaderFactory.cs" />
     <Compile Include="Loader\MaterialLoader.cs" />
+    <Compile Include="Loader\Seel3dLoader.cs" />
     <Compile Include="Loader\TransformationLoader.cs" />
     <Compile Include="Loader\WavefrontLoader.cs" />
     <Compile Include="Object\Export3DType.cs" />

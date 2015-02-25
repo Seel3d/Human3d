@@ -8,22 +8,16 @@ namespace Seel3d.Human3d.Loader
 {
     public class MaterialLoader : ILoader
     {	
-		public static List<string> MtlHeader
+		public static List<string> MtlHeader => new List<string>
 		{
-			get
-			{
-		    	return new List<string>
-			    {
-			        "#",
-			        "# Exported material ",
-			        "#",
-			        "# Made by Seel3d (c)",
-			        "# For more informations visit www.seel3d.com",
-			        "# Or contact aurelien.souchet@epitech.eu ",
-			        "#"
-			    };
-			}
-		}
+		    "#",
+		    "# Exported material ",
+		    "#",
+		    "# Made by Seel3d (c)",
+		    "# For more informations visit www.seel3d.com",
+		    "# Or contact aurelien.souchet@epitech.eu ",
+		    "#"
+		};
 
         #region ILoader implementation
 
@@ -90,5 +84,9 @@ namespace Seel3d.Human3d.Loader
         }
 
         #endregion
+
+        public void Dispose()
+        {
+        }
     }
 }

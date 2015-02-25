@@ -5,60 +5,76 @@ using System.Text;
 using System.Threading.Tasks;
 using Seel3d.Human3d.Loader;
 using Seel3d.Human3d.Object;
+using Seel3d.Human3d.Spec;
 
 namespace Seel3d.Human3d
 {
     public class Human
     {
-        private Object3D _object3D;
+        #region Parametres 3d
 
+        protected Object3D Object3D;
+
+        #endregion
+
+        #region Body
         public int Age { get; set; }
 
         public float Weight { get; set; }
 
-        public string Height { get; set; }
+        public float Height { get; set; }
 
+        // todo voir si mettre ou pas
         public Body Body { get; set; }
 
         public Sex Sexe { get; set; }
 
-        public WavefrontLoader Loader { get; set; }
+        #endregion
+
+        #region Measurements
 
         public Measurements Measurements { get; set; }
 
         public Dictionary<string, double> Transformations { get; set; }
 
-        #region Constructors
+        #endregion
 
-        public Human(string path)
-        {
-            Loader = new WavefrontLoader();
-            _object3D = Loader.Load(path) as Object3D;
-            Transformations = new Dictionary<string, double>();
-        }
+        #region Constructors
 
         public Human()
         {
-            Loader = new WavefrontLoader();
-            _object3D = new Object3D();
+            Object3D = new Object3D();
+            Transformations = new Dictionary<string, double>();
+        }
+
+        public Human(string path, Export3DType type = Export3DType.WaveFront)
+        {
+            Import(path, type);
             Transformations = new Dictionary<string, double>();
         }
 
         #endregion
 
-        public void Import(string path)
+        public void Import(string path, Export3DType importType = Export3DType.WaveFront)
         {
-            _object3D = Loader.Load(path) as Object3D;
+            using (var loader = new WavefrontLoader())
+            {
+                Object3D = loader.Load(path) as Object3D;
+            }
         }
 
         public void Export(string path, Export3DType exportType = Export3DType.WaveFront)
         {
-            Loader.Save(_object3D, path);
+
+            using (var loader = new WavefrontLoader())
+            {
+                loader.Save(Object3D, path);
+            }
         }
 
         public void ApplyTransformation(Transformation transform, double coef)
         {
-            _object3D.ApplyTransformation(transform, coef);
+            Object3D.ApplyTransformation(transform, coef);
         }
 
         public void LaunchTransform(int height, int age, Sex sexe)
@@ -69,10 +85,12 @@ namespace Seel3d.Human3d
 
         private void PrepareTransformations(int height, int age, Sex sexe)
         {
-            Transformations = new Dictionary<string, double>();
+            Transformations = new Dictionary<string, double>
+            {
+                {"age_body", (age - 25d)/(90d - 25d)},
+                {"height_body", (height - 155d)/(194d - 155d)}
+            };
 
-            Transformations.Add("age_body", (age - 25d) / (90d - 25d));
-            Transformations.Add("height_body", (height - 155d) / (194d - 155d));
             if (sexe == Sex.Woman)
             {
                 Transformations.Add("sex_body", 1.0d);
@@ -165,7 +183,6 @@ namespace Seel3d.Human3d
             foreach (var tranformation in Transformations)
             {
                 ApplyTransformation(TransformationLoader.Load(tranformation.Key) as Transformation, tranformation.Value);
-                //Transformations.Remove(tranformation.Key);
             }
         }
 
