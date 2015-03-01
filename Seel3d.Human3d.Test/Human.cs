@@ -13,19 +13,21 @@ namespace Seel3d.Human3d.Test
         [TestInitialize]
         public void IniitializeHuman()
         {
-            Human = new Human
-            {
-                Height = 155f,
-                Age = 25,
-                Weight = 77.5f,
-                Sexe = Sex.Man
-            };
+            //Human = new Human
+            //{
+            //    Height = 155f,
+            //    Age = 25,
+            //    Weight = 77.5f,
+            //    Sexe = Sex.Man
+            //};
+
+            Human = new Human();
         }
 
         [TestMethod]
         public void TestHumanCreation()
         {
-            Human.Export("C://Desktop/", Export3DType.WaveFront);
+            Human.Export(@"C:\Users\Aurelien\Desktop\test3d\test.obj", Export3DType.WaveFront);
         }
 
         [TestMethod]
@@ -33,13 +35,13 @@ namespace Seel3d.Human3d.Test
         {
             
 
-            Human.Export("C://Desktop/", Export3DType.WaveFront);
+            Human.Export(@"C:\Users\Aurelien\Desktop\test3d\test.obj", Export3DType.WaveFront);
         }
 
         [TestMethod]
         public void TestHumanImport()
         {
-            Human.Export("C://Desktop/", Export3DType.WaveFront);
+            Human.Export(@"C:\Users\Aurelien\Desktop\test3d\test.obj", Export3DType.WaveFront);
         }
     }
 }

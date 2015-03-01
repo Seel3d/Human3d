@@ -1,0 +1,38 @@
+# MakeHuman exported MTL
+# www.makehuman.org
+
+
+newmtl DefaultSkin
+Kd 0.5903 0.44 0.338
+Ks 0.3 0.3 0.3
+d 1
+map_Kd Config\Assets\Textures\light_skin.png
+map_D Config\Assets\Textures\light_skin.png 
+
+newmtl mhair01black
+Kd 1 1 1
+Ks 0.04706 0.04706 0.04706
+d 0
+map_Kd Config\Assets\Textures\male01_diffuse_black.png
+map_D Config\Assets\Textures\male01_diffuse_black.png
+
+newmtl Eye_brown
+Kd 1 1 1
+Ks 1 1 1
+d 0
+map_Kd Config\Assets\Textures\brown_eye.png
+map_D Config\Assets\Textures\brown_eye.png
+
+newmtl eyebrow011
+Kd 1 1 1
+Ks 0 0 0
+d 0
+map_Kd Config\Assets\Textures\eyebrow011.png
+map_D Config\Assets\Textures\eyebrow011.png
+
+newmtl bodyMaterial
+Kd 1 1 1
+Ks 0 0 0
+d 0
+map_Kd Config\Assets\Textures\eyelashes01.png
+map_D Config\Assets\Textures\eyelashes01.png

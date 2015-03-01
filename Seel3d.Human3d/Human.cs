@@ -9,7 +9,7 @@ using Seel3d.Human3d.Spec;
 
 namespace Seel3d.Human3d
 {
-    public class Human
+    public class Human : ISpecies
     {
         #region Parametres 3d
 
@@ -18,22 +18,20 @@ namespace Seel3d.Human3d
         #endregion
 
         #region Body
+
         public int Age { get; set; }
 
         public float Weight { get; set; }
 
         public float Height { get; set; }
 
-        // todo voir si mettre ou pas
-        public Body Body { get; set; }
+        public IBody Body { get; set; }
 
         public Sex Sexe { get; set; }
 
         #endregion
 
         #region Measurements
-
-        public Measurements Measurements { get; set; }
 
         public Dictionary<string, double> Transformations { get; set; }
 
@@ -43,7 +41,16 @@ namespace Seel3d.Human3d
 
         public Human()
         {
+            //Human("Assets/default.obj", Export3DType.WaveFront);
+
+            Age = 25;
+            Weight = 50;
+            Height = 150;
+            Sexe = Sex.Man;
+            
             Object3D = new Object3D();
+            Body = new HumanBody();
+            Import("Assets/default.obj", Export3DType.WaveFront);
             Transformations = new Dictionary<string, double>();
         }
 
@@ -185,6 +192,5 @@ namespace Seel3d.Human3d
                 ApplyTransformation(TransformationLoader.Load(tranformation.Key) as Transformation, tranformation.Value);
             }
         }
-
     }
 }

@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Human.cs" />
+    <Compile Include="ISpecies.cs" />
     <Compile Include="Loader\ILoader.cs" />
     <Compile Include="Loader\LoaderFactory.cs" />
     <Compile Include="Loader\MaterialLoader.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="Loader\TransformationLoader.cs" />
     <Compile Include="Loader\WavefrontLoader.cs" />
     <Compile Include="Object\Export3DType.cs" />
+    <Compile Include="Spec\IBody.cs" />
     <Compile Include="Spec\Measurements.cs" />
     <Compile Include="Object\ILoadable.cs" />
     <Compile Include="Object\Material.cs" />
@@ -58,15 +60,40 @@
     <Compile Include="Part\Group.cs" />
     <Compile Include="Part\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spec\Body.cs" />
+    <Compile Include="Spec\HumanBody.cs" />
     <Compile Include="Spec\Ethnicity.cs" />
     <Compile Include="Spec\Sex.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\big.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\big_man.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\default.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\default.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\man.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\normal_man.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\skinny.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\skinny_man.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="Targets\age_body.target" />
     <None Include="Targets\height_body.target" />
     <None Include="Targets\sex_body.target" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

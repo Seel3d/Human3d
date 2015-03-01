@@ -4,21 +4,26 @@ namespace Seel3d.Human3d.Spec
 {
     public class Measurements
     {
-        protected List<Dictionary<string, double>> MeasurementList { get; set; }
+        protected Dictionary<string, double> MeasurementList { get; set; }
 
         public Measurements()
         {
-            MeasurementList = new List<Dictionary<string, double>>();
+            MeasurementList = new Dictionary<string, double>();
         }
 
-        public void AddMeasurement(Dictionary<string, double> measurement)
+        public void AddMeasurement(string name, double value)
         {
-            MeasurementList.Add(measurement);
+            MeasurementList.Add(name, value);
         }
 
-        public List<Dictionary<string, double>> GetMeasurements()
+        public Dictionary<string, double> GetMeasurements()
         {
             return MeasurementList;
+        }
+
+        public double GetMeasurement(string key)
+        {
+            return MeasurementList[key];
         }
     }
 }
